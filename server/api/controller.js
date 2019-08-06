@@ -5,7 +5,7 @@ const db = low("api/db.json");
 
 exports.getAll = function(req, res) {
   const posts = db
-    .get("blogs")
+    .get("posts")
     .sortBy("createdDate")
     .reverse()
     .value();
@@ -17,7 +17,7 @@ exports.create = function(req, res) {
     res.status(422).send("'title' field must be present in json");
   } else {
     const written = db
-      .get("blogs")
+      .get("posts")
       .push({
         id: uuidv1(),
         title: req.body.title,
@@ -37,7 +37,7 @@ exports.delete = function(req, res) {
     res.status(422).send("'id' must be present in params");
   } else {
     const deleted = db
-      .get("blogs")
+      .get("posts")
       .remove({ id: id })
       .write();
     if (deleted.length === 0) {

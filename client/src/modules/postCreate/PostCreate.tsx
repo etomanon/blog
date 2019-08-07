@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Flex } from "@rebass/grid";
 import { Formik, Form, Field, FormikProps } from "formik";
@@ -7,17 +7,15 @@ import { Formik, Form, Field, FormikProps } from "formik";
 // import { postGet } from "../../redux/post/actions";
 // import { selectorPost } from "../../redux/post/selectors";
 
+import { useCategories } from "../../hook/useCategories";
+
 import { Input } from "../../components/formik/Input";
-import { Post } from "../../components/post/Post";
+import { Select } from "../../components/formik/Select";
 
 import { ValidationSchema, FormValues, initialValues } from "./_formik";
 
 export const PostCreate: React.FC<RouteComponentProps> = () => {
-  // const dispatch = useDispatch();
-  // const post = useSelector(selectorPost);
-  // useEffect(() => {
-  //   dispatch(postGet());
-  // }, [dispatch]);
+  const options = useCategories();
   return (
     <>
       <Formik
@@ -27,14 +25,19 @@ export const PostCreate: React.FC<RouteComponentProps> = () => {
         onSubmit={(values: FormValues) => {
           console.log(values);
         }}
-        render={(formikBag: FormikProps<FormValues>) => {
+        render={() => {
           return (
             <Form>
               <Flex flexDirection="column" alignItems="center">
-                <Flex width={[1, 0.333]} mb={3}>
-                  <Field name="title" placeholder="Title" component={Input} maxLength={64} />
+                <Flex width={[1, 0.5, 0.333]} mb={3}>
+                  <Field
+                    name="title"
+                    placeholder="Title"
+                    component={Input}
+                    maxLength={64}
+                  />
                 </Flex>
-                <Flex width={[1, 0.333]}>
+                <Flex width={[1, 0.5, 0.333]} mb={3}>
                   <Field
                     name="content"
                     placeholder="Content"
@@ -42,6 +45,14 @@ export const PostCreate: React.FC<RouteComponentProps> = () => {
                     rows={5}
                     component={Input}
                     maxLength={1500}
+                  />
+                </Flex>
+                <Flex width={[1, 0.5, 0.333]} mb={3}>
+                  <Field
+                    name="categories"
+                    placeholder="Categories"
+                    component={Select}
+                    options={options}
                   />
                 </Flex>
               </Flex>

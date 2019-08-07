@@ -1,6 +1,9 @@
 export const theme = {
   colors: {
     primary: '#4B367C',
+    primary75: "rgba(75, 54, 124, .75)",
+    primary50: "rgba(75, 54, 124, .5)",
+    primary25: "rgba(75, 54, 124, .25)",
     error: '#E21212',
     text: "#333",
     greyLight: "#D3D3D3",

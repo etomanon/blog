@@ -14,27 +14,17 @@ interface InputProps {
 
 export const Input: React.FC<FieldProps & InputProps> = ({
   field,
-  placeholder,
+  form,
   multiline,
-  maxLength,
-  rows
+  ...props
 }) => {
   const { name } = field;
   return (
     <>
       {multiline ? (
-        <TextArea
-          placeholder={placeholder}
-          rows={rows}
-          maxLength={maxLength}
-          {...field}
-        />
+        <TextArea autoComplete="off" {...field} {...props} />
       ) : (
-        <InputStyled
-          placeholder={placeholder}
-          {...field}
-          maxLength={maxLength}
-        />
+        <InputStyled autoComplete="off" {...field} {...props} />
       )}
       <ErrorMessage name={name} component={() => <Text color="error" />} />
     </>

@@ -1,15 +1,13 @@
-import React, { useEffect, useCallback } from "react";
+import React, { useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Flex } from "@rebass/grid";
-import { Formik, Form, Field, FormikProps } from "formik";
-// import { useDispatch, useSelector } from "react-redux";
-
-// import { postGet } from "../../redux/post/actions";
-// import { selectorPost } from "../../redux/post/selectors";
+import { Formik, Form, Field, FormikActions } from "formik";
+import { useSnackbar } from "notistack";
 
 import ky from "../../ky/ky";
 
 import { useCategories } from "../../hook/useCategories";
+import { Loader } from "../../components/loader/Loader";
 import { Button } from "../../components/control/styled/Button";
 import { Input } from "../../components/formik/Input";
 import { Select } from "../../components/formik/Select";
@@ -17,15 +15,30 @@ import { Select } from "../../components/formik/Select";
 import { ValidationSchema, FormValues, initialValues } from "./_formik";
 
 export const PostCreate: React.FC<RouteComponentProps> = () => {
+  const [loading, setLoading] = useState(false);
+  const { enqueueSnackbar } = useSnackbar();
   const options = useCategories();
-  const onSubmit = (values: FormValues) => {
-    console.log("VALUES", values);
+  const onSubmit = (
+    values: FormValues,
+    formikActions: FormikActions<FormValues>
+  ) => {
+    setLoading(true);
+    formikActions.resetForm();
     ky.post("post", { json: values })
-      .then((res: any) => console.log("RESPONSE", res))
-      .catch((err: any) => console.log("ERROR", err));
+      .then(() => {
+        setLoading(false);
+        enqueueSnackbar("Post created", { variant: "success" });
+      })
+      .catch(() => {
+        setLoading(false);
+        enqueueSnackbar("Something went wrong. Please try again", {
+          variant: "error"
+        });
+      });
   };
   return (
     <>
+      {loading && <Loader />}
       <Formik
         initialValues={initialValues}
         validationSchema={ValidationSchema}
@@ -62,7 +75,9 @@ export const PostCreate: React.FC<RouteComponentProps> = () => {
                   />
                 </Flex>
                 <Flex width={[1, 0.5, 0.333]} justifyContent="center">
-                  <Button type="submit" width={[1, "auto"]}>Create</Button>
+                  <Button type="submit" width={[1, "auto"]}>
+                    Create
+                  </Button>
                 </Flex>
               </Flex>
             </Form>

@@ -10,15 +10,21 @@ import { TextHeader } from "../text/styled/TextHeader";
 import { Text } from "../text/styled/Text";
 import { Category } from "../category/styled/Category";
 import { Fade } from "../animation/Fade";
+import { Link } from "../control/styled/Link";
 
 import { PostWrapper, PostDelete, PostLine } from "./styled/Post";
 
-export const Post: React.FC<PostProps> = ({
+interface PostOuterProps {
+  hideLink?: boolean;
+}
+
+export const Post: React.FC<PostProps & PostOuterProps> = ({
   id,
   title,
   dateCreated,
   categories,
-  content
+  content,
+  hideLink
 }) => {
   const dispatch = useDispatch();
   const [show, setShow] = useState(false);
@@ -45,7 +51,14 @@ export const Post: React.FC<PostProps> = ({
           </Flex>
           <Flex width={1}>
             <Fade show={show}>
-              <Text mt={3}>{content}</Text>
+              <Text display="block" mt={3} mb={2}>
+                {content}
+              </Text>
+              {!hideLink && (
+                <Flex width={1} justifyContent="center">
+                  <Link to={`/item/${id}`}>Go to detail</Link>
+                </Flex>
+              )}
             </Fade>
           </Flex>
         </Flex>

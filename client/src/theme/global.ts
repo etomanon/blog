@@ -1,4 +1,4 @@
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -19,6 +19,11 @@ export const GlobalStyles = createGlobalStyle`
   body {
     font-size: 1.6rem;
   }
+
+	.MuiSnackbarContent-message {
+		font-family: 'Montserrat', 'Roboto', sans-serif;
+		font-size: 1.6rem;
+	}
 
 	h1,
 	h2,

@@ -2,6 +2,7 @@ import React from "react";
 import "sanitize.css";
 import { ThemeProvider } from "styled-components";
 import { Provider } from "react-redux";
+import { SnackbarProvider } from "notistack";
 
 import { GlobalStyles } from "./theme/global";
 import { theme } from "./theme/theme";
@@ -12,16 +13,14 @@ const store = configureStore();
 
 const App: React.FC = () => {
   return (
-    <>
-      <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <>
-            <GlobalStyles />
-            <Router />
-          </>
-        </ThemeProvider>
-      </Provider>
-    </>
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <SnackbarProvider preventDuplicate>
+          <GlobalStyles />
+          <Router />
+        </SnackbarProvider>
+      </ThemeProvider>
+    </Provider>
   );
 };
 

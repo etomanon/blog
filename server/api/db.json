@@ -1,44 +1,14 @@
 {
   "posts": [
     {
-      "id": "519c2e60-247e-11e9-9929-b50b0dfd049b",
-      "title": "Motorsport",
-      "categories": [
-        "sport",
-        "cars"
-      ],
-      "content": "Lorem ipsum lorem ipsum",
-      "dateCreated": 1548846056518
-    },
-    {
-      "id": "3389c330-b941-11e9-bc46-f1fc69548b2a",
-      "title": "Random cars",
+      "id": "8605d2e0-b958-11e9-bf2f-69f86b3a63d0",
+      "title": "title",
       "categories": [
         "random",
-        "cars"
+        "asdasd"
       ],
-      "content": "lorem ipsum\n",
-      "dateCreated": 1565202530019
-    },
-    {
-      "id": "d22fedc0-b941-11e9-a69e-6728e0bb68de",
-      "title": "another post",
-      "categories": [
-        "cars",
-        "sport"
-      ],
-      "content": "lorem ipsum",
-      "dateCreated": 1565202796189
-    },
-    {
-      "id": "d29cb950-b941-11e9-a69e-6728e0bb68de",
-      "title": "another post",
-      "categories": [
-        "cars",
-        "sport"
-      ],
-      "content": "lorem ipsum",
-      "dateCreated": 1565202796901
+      "content": "asdasd",
+      "dateCreated": 1565212546831
     }
   ]
 }

@@ -16,9 +16,10 @@ const styles = {
 };
 
 interface SelectProps {
-  options: Option[];
+  options?: Option[];
 }
 
+// multi select, creatable new categories
 export const Select: React.FC<SelectProps & FieldProps> = ({
   field,
   form: { setFieldValue, setFieldTouched },
@@ -26,23 +27,27 @@ export const Select: React.FC<SelectProps & FieldProps> = ({
   ...props
 }) => {
   const { name } = field;
+  // Formik value to react-select Option
+  const valueToOption =
+    field.value && field.value.map((v: string) => ({ label: v, value: v }));
   return (
     <Flex width={1} flexDirection="column">
       <CreatableSelect
+        {...field}
+        {...props}
         styles={styles}
         isMulti
         isClearable
-        {...field}
-        {...props}
         onFocus={() => setFieldTouched(name, true)}
-        isLoading={options.length === 0}
+        isLoading={options && options.length === 0}
         options={options}
-        label={field.value && field.value.label}
-        value={field.value && field.value.value}
+        label={valueToOption}
+        value={valueToOption}
         closeMenuOnSelect={false}
         onChange={(option: any) => {
+          // setFieldValue to Formik
           if (option) {
-            const values = option.map((o: Option) => o.value)
+            const values = option.map((o: Option) => o.value);
             setFieldValue(name, values);
           } else {
             setFieldValue(name, []);

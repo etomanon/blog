@@ -10,7 +10,7 @@ export const Header: React.FC = () => {
   return (
     <>
       <HeaderWrapper
-        m={["1rem 0.5rem", "1rem 0.5rem", "1rem auto"]}
+        m={["1.5rem 0.5rem", "1.5rem 0.5rem", "1.5rem auto"]}
         flexDirection={["column", "row"]}
       >
         <Flex width={1} justifyContent="center" alignItems="center" mb={3}>

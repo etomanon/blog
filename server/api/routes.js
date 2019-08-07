@@ -6,6 +6,7 @@ module.exports = function(app) {
         .post(controller.create);
 
     app.route("/api/post/:id")
+        .get(controller.get)
         .delete(controller.delete);
 
     app.route("/api/categories")

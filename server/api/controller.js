@@ -31,6 +31,20 @@ exports.create = function(req, res) {
   }
 };
 
+exports.get = function(req, res) {
+  const id = req.params.id;
+  if (!id) {
+    res.status(422).send("'id' must be present in params");
+  } else {
+    const post = db.get("posts").value({ id: id });
+    if (post.length === 0) {
+      res.status(404).send("id not found, nothing to delete");
+    } else {
+      res.send();
+    }
+  }
+};
+
 exports.delete = function(req, res) {
   const id = req.params.id;
   if (!id) {

@@ -7,8 +7,10 @@ import { Formik, Form, Field, FormikProps } from "formik";
 // import { postGet } from "../../redux/post/actions";
 // import { selectorPost } from "../../redux/post/selectors";
 
-import { useCategories } from "../../hook/useCategories";
+import ky from "../../ky/ky";
 
+import { useCategories } from "../../hook/useCategories";
+import { Button } from "../../components/control/styled/Button";
 import { Input } from "../../components/formik/Input";
 import { Select } from "../../components/formik/Select";
 
@@ -16,15 +18,19 @@ import { ValidationSchema, FormValues, initialValues } from "./_formik";
 
 export const PostCreate: React.FC<RouteComponentProps> = () => {
   const options = useCategories();
+  const onSubmit = (values: FormValues) => {
+    console.log("VALUES", values);
+    ky.post("post", { json: values })
+      .then((res: any) => console.log("RESPONSE", res))
+      .catch((err: any) => console.log("ERROR", err));
+  };
   return (
     <>
       <Formik
         initialValues={initialValues}
         validationSchema={ValidationSchema}
         enableReinitialize
-        onSubmit={(values: FormValues) => {
-          console.log(values);
-        }}
+        onSubmit={onSubmit}
         render={() => {
           return (
             <Form>
@@ -54,6 +60,9 @@ export const PostCreate: React.FC<RouteComponentProps> = () => {
                     component={Select}
                     options={options}
                   />
+                </Flex>
+                <Flex width={[1, 0.5, 0.333]} justifyContent="center">
+                  <Button type="submit" width={[1, "auto"]}>Create</Button>
                 </Flex>
               </Flex>
             </Form>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex } from "@rebass/grid";
 
-import { NavLink } from "../control/NavLink";
+import { NavLink } from "../control/styled/NavLink";
 import { Text } from "../text/styled/Text";
 
 import { HeaderWrapper } from "./styled/Header";

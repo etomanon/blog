@@ -23,7 +23,7 @@ exports.create = function(req, res) {
         title: req.body.title,
         categories: req.body.categories,
         content: req.body.content,
-        createdDate: new Date().getTime()
+        dateCreated: new Date().getTime()
       })
       .last()
       .write();
@@ -53,7 +53,8 @@ exports.getCategories = function(req, res) {
     .get("posts")
     .map("categories")
     .flatten()
+    .union()
     .value();
-    
+
   res.send(posts);
 };

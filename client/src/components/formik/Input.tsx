@@ -1,9 +1,9 @@
 import React from "react";
-import { FieldProps, getIn, ErrorMessage } from "formik";
-
-import { Text } from "../text/styled/Text";
+import { FieldProps } from "formik";
+import { Flex } from "@rebass/grid";
 
 import { Input as InputStyled, TextArea } from "./styled/Formik";
+import { ErrorMessage } from "./ErrorMessage";
 
 interface InputProps {
   placeholder?: string;
@@ -21,12 +21,14 @@ export const Input: React.FC<FieldProps & InputProps> = ({
   const { name } = field;
   return (
     <>
-      {multiline ? (
-        <TextArea autoComplete="off" {...field} {...props} />
-      ) : (
-        <InputStyled autoComplete="off" {...field} {...props} />
-      )}
-      <ErrorMessage name={name} component={() => <Text color="error" />} />
+      <Flex width={1} flexDirection="column">
+        {multiline ? (
+          <TextArea autoComplete="off" {...field} {...props} />
+        ) : (
+          <InputStyled autoComplete="off" {...field} {...props} />
+        )}
+        <ErrorMessage name={name} />
+      </Flex>
     </>
   );
 };

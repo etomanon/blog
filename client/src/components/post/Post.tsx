@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Flex } from "@rebass/grid";
-import { format } from "date-fns";
 import { useDispatch } from "react-redux";
+import { format } from "date-fns";
 
 import { postDelete } from "../../redux/post/actions";
 import { PostProps } from "../../types/post";

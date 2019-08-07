@@ -7,10 +7,10 @@ width: 100%;
 border: 2px solid transparent;
 outline: none;
 border-bottom: 2px solid ${({ theme }) => theme.colors.primary};
-border-radius: 4px;
 &:focus {
   outline: none;
   border: 2px solid ${({ theme }) => theme.colors.primary};
+  border-radius: 4px;
 }`
 
 export const Input = styled.input`
@@ -22,6 +22,7 @@ export const TextArea = styled.textarea`
  resize: none;
  padding: 1rem;
  border: 2px solid ${({ theme }) => theme.colors.greyLight};
+ border-radius: 4px;
  &:focus {
   border: 2px solid ${({ theme }) => theme.colors.primary};
 }

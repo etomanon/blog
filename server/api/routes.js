@@ -8,4 +8,7 @@ module.exports = function(app) {
     app.route("/api/post/:id")
         .delete(controller.delete);
 
+    app.route("/api/categories")
+        .get(controller.getCategories);
+
 };

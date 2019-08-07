@@ -47,3 +47,13 @@ exports.delete = function(req, res) {
     }
   }
 };
+
+exports.getCategories = function(req, res) {
+  const posts = db
+    .get("posts")
+    .map("categories")
+    .flatten()
+    .value();
+    
+  res.send(posts);
+};

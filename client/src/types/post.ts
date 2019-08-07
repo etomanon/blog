@@ -1,7 +1,7 @@
-export interface Post {
-  id: number;
+export interface PostProps {
+  id: string;
   title: string;
-  category: string[];
+  categories: string[];
   content: string;
   dateCreated: number;
 }

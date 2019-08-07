@@ -2,33 +2,57 @@ import { createAsyncAction } from 'typesafe-actions';
 import { Dispatch } from 'redux';
 
 import ky from '../../ky/ky';
-import { Post } from '../../types/post';
+import { PostProps } from '../../types/post';
 
 export const postGetAsync = createAsyncAction(
   'POST_GET_REQUEST',
   'POST_GET_SUCCESS',
   'POST_GET_FAILURE',
-)<void, Post[], void>();
+)<void, PostProps[], void>();
 
-export const userRequest = async (): Promise<Post[] | null> => {
+export const postGetApi = async (): Promise<PostProps[] | null> => {
   try {
-    const user = await ky.get("user").json<Post[]>();
-    return user;
+    const post = await ky.get("post").json<PostProps[]>();
+    return post;
   } catch (error) {
     console.log(error);
     return null;
   }
 };
 
-export const userGet = () => async (dispatch: Dispatch) => {
-  // Start request
+export const postGet = () => async (dispatch: Dispatch) => {
   dispatch(postGetAsync.request());
   // Get data
-  const post = await userRequest();
-  // Check data
+  const post = await postGetApi();
   if (post) {
     dispatch(postGetAsync.success(post));
   } else {
     dispatch(postGetAsync.failure());
+  }
+};
+
+export const postDeleteApi = async (id: string): Promise<boolean> => {
+  try {
+    await ky.delete(`post/${id}`);
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};
+
+export const postDeleteAsync = createAsyncAction(
+  'POST_DELETE_REQUEST',
+  'POST_DELETE_SUCCESS',
+  'POST_DELETE_FAILURE',
+)<string, string, void>();
+
+export const postDelete = (id: string) => async (dispatch: Dispatch) => {
+  dispatch(postDeleteAsync.request(id));
+  const postDeleted = await postDeleteApi(id);
+  if (postDeleted) {
+    dispatch(postDeleteAsync.success(id));
+  } else {
+    dispatch(postDeleteAsync.failure());
   }
 };

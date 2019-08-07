@@ -8,7 +8,7 @@ import { selectorPost } from "../../redux/post/selectors";
 
 import { Post } from "../../components/post/Post";
 
-export const Home: React.FC<RouteComponentProps> = () => {
+export const PostCreate: React.FC<RouteComponentProps> = () => {
   const dispatch = useDispatch();
   const post = useSelector(selectorPost);
   useEffect(() => {

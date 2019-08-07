@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@rebass/grid": "^6.1.0",
+    "date-fns": "^2.0.0-beta.4",
     "ky": "^0.11.2",
     "lodash": "^4.17.15",
     "react": "^16.8.6",
@@ -11,10 +12,12 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
+    "react-transition-group": "^4.2.2",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "sanitize.css": "^11.0.0",
     "styled-components": "^4.3.2",
+    "styled-icons": "^8.3.0",
     "styled-system": "^5.0.18",
     "typesafe-actions": "^4.4.2",
     "typescript": "3.5.3"
@@ -46,6 +49,7 @@
     "@types/react-dom": "^16.8.5",
     "@types/react-redux": "^7.1.1",
     "@types/react-router-dom": "^4.3.4",
+    "@types/react-transition-group": "^4.2.1",
     "@types/rebass__grid": "^6.0.5",
     "@types/styled-components": "^4.1.18",
     "@types/styled-system": "^5.0.1",

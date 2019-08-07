@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
-  html: {
+  html {
     font-size: 62.5%;
   }
 	html,
@@ -14,8 +14,9 @@ export const GlobalStyles = createGlobalStyle`
 		-webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 		min-height: 100vh;
+		color: ${({ theme }) => theme.colors.text}
 	}
-  body: {
+  body {
     font-size: 1.6rem;
   }
 

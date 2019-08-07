@@ -2,7 +2,8 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 import { Home } from "../modules/home/Home";
-import { Dashboard } from "../modules/dashboard/Dashboard";
+import { Item } from "../modules/item/Item";
+import { PostCreate } from "../modules/postCreate/PostCreate";
 import { Error404 } from "../modules/error404/Error404";
 
 import { Header } from "../components/header/Header";
@@ -16,7 +17,8 @@ export const Router: React.FC = () => {
       <Wrapper m={["0 0.5rem", "0 0.5rem", "0 auto"]}>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/dashboard" component={Dashboard} />
+          <Route exact path="/create" component={PostCreate} />
+          <Route path="/item/:id" component={Item} />
           <Route component={Error404} />
         </Switch>
       </Wrapper>

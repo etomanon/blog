@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
 		margin: 0;
 		padding: 0;
 		text-rendering: optimizeLegibility;
-		font-family: 'Montserrat', sans-serif;
+		font-family: 'Montserrat', 'Roboto', sans-serif;
 		-webkit-font-smoothing: antialiased;
     overflow-x: hidden;
 		min-height: 100vh;
@@ -32,5 +32,10 @@ export const GlobalStyles = createGlobalStyle`
 	ul {
 		margin-top: 0;
 		margin-bottom: 0;
+	}
+
+	::placeholder {
+		color: ${({ theme }) => theme.colors.text};
+		font-family: 'Montserrat', 'Roboto', sans-serif;
 	}
 `;

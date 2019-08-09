@@ -1,9 +1,9 @@
-import kyDefault from 'ky';
+import kyDefault from "ky";
 
-const apiUrl = `http://localhost:8080`
+const apiUrl = `http://localhost:8080`;
 
 const ky = kyDefault.extend({
-  prefixUrl: `${apiUrl}/api/`,
-})
+  prefixUrl: `${apiUrl}/api/`
+});
 
 export default ky;

@@ -1,13 +1,13 @@
-import { createAsyncAction } from 'typesafe-actions';
-import { Dispatch } from 'redux';
+import { createAsyncAction } from "typesafe-actions";
+import { Dispatch } from "redux";
 
-import ky from '../../ky/ky';
-import { PostProps } from '../../types/post';
+import ky from "../../ky/ky";
+import { PostProps } from "../../types/post";
 
 export const postGetAsync = createAsyncAction(
-  'POST_GET_REQUEST',
-  'POST_GET_SUCCESS',
-  'POST_GET_FAILURE',
+  "POST_GET_REQUEST",
+  "POST_GET_SUCCESS",
+  "POST_GET_FAILURE"
 )<void, PostProps[], void>();
 
 export const postGetApi = async (): Promise<PostProps[] | null> => {
@@ -20,6 +20,7 @@ export const postGetApi = async (): Promise<PostProps[] | null> => {
   }
 };
 
+// get all posts
 export const postGet = () => async (dispatch: Dispatch) => {
   dispatch(postGetAsync.request());
   // Get data
@@ -42,11 +43,12 @@ export const postDeleteApi = async (id: string): Promise<boolean> => {
 };
 
 export const postDeleteAsync = createAsyncAction(
-  'POST_DELETE_REQUEST',
-  'POST_DELETE_SUCCESS',
-  'POST_DELETE_FAILURE',
+  "POST_DELETE_REQUEST",
+  "POST_DELETE_SUCCESS",
+  "POST_DELETE_FAILURE"
 )<string, string, void>();
 
+// delete single post
 export const postDelete = (id: string) => async (dispatch: Dispatch) => {
   dispatch(postDeleteAsync.request(id));
   const postDeleted = await postDeleteApi(id);

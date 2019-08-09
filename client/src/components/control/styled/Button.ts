@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import {width, WidthProps} from 'styled-system';
+import styled from "styled-components";
+import { width, WidthProps } from "styled-system";
 
 export const Button = styled.button<WidthProps>`
   padding: 1rem 1.5rem;
@@ -11,7 +11,7 @@ export const Button = styled.button<WidthProps>`
   color: #fff;
   border-radius: 4px;
   cursor: pointer;
-  transition: all .2s ease-in;
+  transition: all 0.2s ease-in;
   &:focus {
     outline: none;
     box-shadow: none;
@@ -24,4 +24,4 @@ export const Button = styled.button<WidthProps>`
     background: #fff;
   }
   ${width}
-`
+`;

@@ -7,7 +7,7 @@ interface ErrorMessageProps {
   name: string;
 }
 
-export const ErrorMessage: React.FC<ErrorMessageProps> = ({name}) => {
+export const ErrorMessage: React.FC<ErrorMessageProps> = ({ name }) => {
   return (
     <FormikErrorMessage name={name}>
       {msg => (

@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Flex } from "@rebass/grid";
 import { useDispatch } from "react-redux";
 import { format } from "date-fns";
+import { useSnackbar } from "notistack";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 
 import { postDelete } from "../../redux/post/actions";
 import { PostProps } from "../../types/post";
@@ -15,21 +17,27 @@ import { Link } from "../control/styled/Link";
 import { PostWrapper, PostDelete, PostLine } from "./styled/Post";
 
 interface PostOuterProps {
-  hideLink?: boolean;
+  // detail variant
+  isDetail?: boolean;
 }
 
-export const Post: React.FC<PostProps & PostOuterProps> = ({
-  id,
-  title,
-  dateCreated,
-  categories,
-  content,
-  hideLink
-}) => {
+export const PostView: React.FC<
+  PostProps & PostOuterProps & RouteComponentProps
+> = ({ id, title, dateCreated, categories, content, isDetail, history }) => {
+  const { enqueueSnackbar } = useSnackbar();
   const dispatch = useDispatch();
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(isDetail ? true : false);
   const onClick = () => setShow(prev => !prev);
-  const onDelete = () => dispatch(postDelete(id));
+  const onDelete = () => {
+    dispatch(postDelete(id));
+    enqueueSnackbar("Post deleted", {
+      variant: "success"
+    });
+    if (isDetail) {
+      history.push("/");
+    }
+  };
+
   return (
     <>
       <PostWrapper onClick={onClick}>
@@ -54,7 +62,7 @@ export const Post: React.FC<PostProps & PostOuterProps> = ({
               <Text display="block" mt={3} mb={2}>
                 {content}
               </Text>
-              {!hideLink && (
+              {!isDetail && (
                 <Flex width={1} justifyContent="center">
                   <Link to={`/item/${id}`}>Go to detail</Link>
                 </Flex>
@@ -66,3 +74,5 @@ export const Post: React.FC<PostProps & PostOuterProps> = ({
     </>
   );
 };
+
+export const Post = withRouter(PostView);

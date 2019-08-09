@@ -1,8 +1,7 @@
-import { initialPost, PostState } from './post/reducers';
+import { initialPost, PostState } from "./post/reducers";
 
-// Initial state for store
 export const initialState = {
-  post: initialPost,
+  post: initialPost
 };
 
 export interface AppState {

@@ -1,4 +1,3 @@
-import ky from '../ky/ky';
+import ky from "../ky/ky";
 
-export const categoriesLoad = () =>
-  ky.get('categories').json<string[]>();
+export const categoriesLoad = () => ky.get("categories").json<string[]>();

@@ -11,7 +11,9 @@ import { selectorPost } from "../../redux/post/selectors";
 import { Text } from "../../components/text/styled/Text";
 import { Post } from "../../components/post/Post";
 
-type TParams = { id: string };
+interface TParams {
+  id: string;
+}
 
 export const Item: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   const [item, setItem] = useState<PostProps | undefined>(undefined);
@@ -31,7 +33,7 @@ export const Item: React.FC<RouteComponentProps<TParams>> = ({ match }) => {
   return (
     <Flex width={1} justifyContent="center">
       {!item && !post.pending && <Text>No post found</Text>}
-      <Flex width={[1, 0.75, 0.5]}>{item && <Post {...item} hideLink />}</Flex>
+      <Flex width={[1, 0.75, 0.5]}>{item && <Post {...item} isDetail />}</Flex>
     </Flex>
   );
 };

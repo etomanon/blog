@@ -3,10 +3,12 @@ import { RouteComponentProps } from "react-router-dom";
 import { Flex } from "@rebass/grid";
 import { Formik, Form, Field, FormikActions } from "formik";
 import { useSnackbar } from "notistack";
+import uuid from "uuid/v1";
 
 import ky from "../../ky/ky";
-
 import { useCategories } from "../../hook/useCategories";
+
+import { Text } from "../../components/text/styled/Text";
 import { Loader } from "../../components/loader/Loader";
 import { Button } from "../../components/control/styled/Button";
 import { Input } from "../../components/formik/Input";
@@ -14,7 +16,7 @@ import { Select } from "../../components/formik/Select";
 
 import { ValidationSchema, FormValues, initialValues } from "./_formik";
 
-export const PostCreate: React.FC<RouteComponentProps> = () => {
+export const PostCreate: React.FC<RouteComponentProps> = ({ history }) => {
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const options = useCategories();
@@ -24,10 +26,15 @@ export const PostCreate: React.FC<RouteComponentProps> = () => {
   ) => {
     setLoading(true);
     formikActions.resetForm();
-    ky.post("post", { json: values })
+    const payload: FormValues = {
+      ...values,
+      id: uuid()
+    };
+    ky.post("post", { json: payload })
       .then(() => {
         setLoading(false);
         enqueueSnackbar("Post created", { variant: "success" });
+        history.push("/");
       })
       .catch(() => {
         setLoading(false);
@@ -54,6 +61,7 @@ export const PostCreate: React.FC<RouteComponentProps> = () => {
                     placeholder="Title"
                     component={Input}
                     maxLength={64}
+                    autoFocus
                   />
                 </Flex>
                 <Flex width={[1, 0.5, 0.333]} mb={3}>
@@ -66,13 +74,14 @@ export const PostCreate: React.FC<RouteComponentProps> = () => {
                     maxLength={1500}
                   />
                 </Flex>
-                <Flex width={[1, 0.5, 0.333]} mb={3}>
+                <Flex width={[1, 0.5, 0.333]} mb={3} flexWrap="wrap">
                   <Field
                     name="categories"
-                    placeholder="Categories"
+                    placeholder="Categories*"
                     component={Select}
                     options={options}
                   />
+                  <Text fontSize={0}>*Start typing to create new category</Text>
                 </Flex>
                 <Flex width={[1, 0.5, 0.333]} justifyContent="center">
                   <Button type="submit" width={[1, "auto"]}>

@@ -1,5 +1,5 @@
 const low = require("lowdb");
-const uuidv1 = require("uuid/v1");
+// const uuidv1 = require("uuid/v1");
 
 const db = low("api/db.json");
 
@@ -19,7 +19,7 @@ exports.create = function(req, res) {
     const written = db
       .get("posts")
       .push({
-        id: uuidv1(),
+        id: req.body.id,
         title: req.body.title,
         categories: req.body.categories,
         content: req.body.content,

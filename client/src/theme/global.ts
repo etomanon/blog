@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
   html {
@@ -6,24 +6,24 @@ export const GlobalStyles = createGlobalStyle`
   }
 	html,
 	body {
-		position: relative;
 		margin: 0;
 		padding: 0;
 		text-rendering: optimizeLegibility;
 		font-family: 'Montserrat', 'Roboto', sans-serif;
 		-webkit-font-smoothing: antialiased;
     overflow-x: hidden;
-		min-height: 100vh;
 		color: ${({ theme }) => theme.colors.text}
 	}
   body {
     font-size: 1.6rem;
   }
 
-	.MuiSnackbarContent-message {
+	.MuiSnackbarContent-message, textarea, input {
 		font-family: 'Montserrat', 'Roboto', sans-serif;
 		font-size: 1.6rem;
 	}
+
+	
 
 	h1,
 	h2,

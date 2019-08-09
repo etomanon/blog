@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
 import { Flex } from "@rebass/grid";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,13 +6,20 @@ import { useSnackbar } from "notistack";
 
 import { postGet } from "../../redux/post/actions";
 import { selectorPost } from "../../redux/post/selectors";
+import { useCategories } from "../../hook/useCategories";
 
 import { Loader } from "../../components/loader/Loader";
-import { Post } from "../../components/post/Post";
+
+import { HomeHeader } from "./HomeHeader";
+import { HomeViewNormal } from "./HomeViewNormal";
+import { HomeViewCategory } from "./HomeViewCategory";
+import { ViewsProps } from "./_utils";
 
 export const Home: React.FC<RouteComponentProps> = () => {
+  const [view, setView] = useState<ViewsProps>("Normal");
   const dispatch = useDispatch();
   const post = useSelector(selectorPost);
+  const categories = useCategories(post.posts);
   const { enqueueSnackbar } = useSnackbar();
   useEffect(() => {
     dispatch(postGet());
@@ -27,17 +34,12 @@ export const Home: React.FC<RouteComponentProps> = () => {
   return (
     <>
       {post.pending && <Loader />}
-      <Flex m={-3} flexWrap="wrap" alignItems="flex-start">
-        {post.posts.map(post => (
-          <Flex
-            key={post.id}
-            p={3}
-            width={[1, 0.5, 0.3333]}
-            justifyContent="center"
-          >
-            <Post {...post} />
-          </Flex>
-        ))}
+      <HomeHeader view={view} setView={setView} />
+      <Flex m={-1} flexWrap="wrap" width={1}>
+        {view === "Normal" && <HomeViewNormal posts={post.posts} />}
+        {view === "Category" && (
+          <HomeViewCategory posts={post.posts} categories={categories} />
+        )}
       </Flex>
     </>
   );

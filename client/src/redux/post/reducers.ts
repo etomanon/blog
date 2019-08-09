@@ -1,10 +1,10 @@
-import { ActionType, getType } from 'typesafe-actions';
-import { Reducer } from 'redux';
+import { ActionType, getType } from "typesafe-actions";
+import { Reducer } from "redux";
 
-import { pending, rejected, StateCommon } from '../utils/common';
-import { PostProps } from '../../types/post';
+import { pending, rejected, StateCommon } from "../utils/common";
+import { PostProps } from "../../types/post";
 
-import * as actions from './actions';
+import * as actions from "./actions";
 
 export interface PostState extends StateCommon {
   posts: PostProps[];
@@ -13,12 +13,12 @@ export interface PostState extends StateCommon {
 export const initialPost: PostState = {
   posts: [],
   pending: false,
-  error: false,
+  error: false
 };
 
 export const reducerPost: Reducer<PostState, PostActions> = (
   state = initialPost,
-  action,
+  action
 ) => {
   switch (action.type) {
     case getType(actions.postGetAsync.request):
@@ -31,13 +31,13 @@ export const reducerPost: Reducer<PostState, PostActions> = (
       return {
         ...state,
         posts: action.payload,
-        pending: false,
+        pending: false
       };
     case getType(actions.postDeleteAsync.success):
       return {
         ...state,
         posts: state.posts.filter(p => p.id !== action.payload),
-        pending: false,
+        pending: false
       };
     default:
       return state;

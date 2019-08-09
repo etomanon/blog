@@ -8,21 +8,26 @@ import { Error404 } from "../modules/error404/Error404";
 
 import { Header } from "../components/header/Header";
 import { Footer } from "../components/footer/Footer";
-import { Wrapper } from "../components/wrapper/styled/Wrapper";
+import {
+  WrapperRouter,
+  WrapperApp
+} from "../components/wrapper/styled/Wrapper";
 
 export const Router: React.FC = () => {
   return (
     <BrowserRouter>
-      <Header />
-      <Wrapper m={["0 0.5rem", "0 0.5rem", "0 auto"]}>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/create" component={PostCreate} />
-          <Route path="/item/:id" component={Item} />
-          <Route component={Error404} />
-        </Switch>
-      </Wrapper>
-      <Footer />
+      <WrapperApp>
+        <Header />
+        <WrapperRouter p={["0 0.5rem", "0 0.5rem", "0"]} m={[0, 0, "0 auto"]}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/create" component={PostCreate} />
+            <Route path="/item/:id" component={Item} />
+            <Route component={Error404} />
+          </Switch>
+        </WrapperRouter>
+        <Footer />
+      </WrapperApp>
     </BrowserRouter>
   );
 };

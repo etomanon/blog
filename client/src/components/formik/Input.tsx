@@ -10,6 +10,7 @@ interface InputProps {
   multiline?: boolean;
   maxLength?: number;
   rows?: number;
+  autoFocus?: boolean;
 }
 
 export const Input: React.FC<FieldProps & InputProps> = ({

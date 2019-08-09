@@ -10,7 +10,7 @@ export const postGetAsync = createAsyncAction(
   "POST_GET_FAILURE"
 )<void, PostProps[], void>();
 
-export const postGetApi = async (): Promise<PostProps[] | null> => {
+const postGetApi = async (): Promise<PostProps[] | null> => {
   try {
     const post = await ky.get("post").json<PostProps[]>();
     return post;
@@ -32,7 +32,7 @@ export const postGet = () => async (dispatch: Dispatch) => {
   }
 };
 
-export const postDeleteApi = async (id: string): Promise<boolean> => {
+const postDeleteApi = async (id: string): Promise<boolean> => {
   try {
     await ky.delete(`post/${id}`);
     return true;

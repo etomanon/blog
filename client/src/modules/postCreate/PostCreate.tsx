@@ -4,9 +4,11 @@ import { Flex } from "@rebass/grid";
 import { Formik, Form, Field, FormikActions } from "formik";
 import { useSnackbar } from "notistack";
 import uuid from "uuid/v1";
+import { useDispatch } from "react-redux";
 
 import ky from "../../ky/ky";
 import { useCategories } from "../../hook/useCategories";
+import { postGet } from "../../redux/post/actions";
 
 import { Text } from "../../components/text/styled/Text";
 import { Loader } from "../../components/loader/Loader";
@@ -17,6 +19,7 @@ import { Select } from "../../components/formik/Select";
 import { ValidationSchema, FormValues, initialValues } from "./_formik";
 
 export const PostCreate: React.FC<RouteComponentProps> = ({ history }) => {
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const options = useCategories();
@@ -26,15 +29,17 @@ export const PostCreate: React.FC<RouteComponentProps> = ({ history }) => {
   ) => {
     setLoading(true);
     formikActions.resetForm();
+    const id = uuid();
     const payload: FormValues = {
       ...values,
-      id: uuid()
+      id
     };
     ky.post("post", { json: payload })
       .then(() => {
+        dispatch(postGet());
         setLoading(false);
         enqueueSnackbar("Post created", { variant: "success" });
-        history.push("/");
+        history.push(`/item/${id}`);
       })
       .catch(() => {
         setLoading(false);

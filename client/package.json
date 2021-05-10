@@ -8,7 +8,7 @@
     "date-fns": "^2.0.0-beta.4",
     "formik": "^1.5.8",
     "ky": "^0.11.2",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "notistack": "^0.8.9",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
